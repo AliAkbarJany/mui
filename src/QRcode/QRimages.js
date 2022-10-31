@@ -30,7 +30,7 @@ const QRimages = ({ qrCode }) => {
                 <figure class="px-10 pt-10">
                     {
                         img && <div>
-                            <a href={img} download="qrr.png">
+                            <a href={img} download={name}>
                                 <img src={img} alt="QR Code" />
                             </a>
 
