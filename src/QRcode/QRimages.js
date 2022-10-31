@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import QRcode from '../QRcode/QRcode';
 import QrScanner from 'qr-scanner';
 
+// ai khane (qrCode) Images component thake ansi....
 const QRimages = ({ qrCode }) => {
     const { name, img } = qrCode
     // const [qrImageUrl, setQrImageUrl] = useState("")

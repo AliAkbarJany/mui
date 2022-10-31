@@ -1,0 +1,31 @@
+h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+h1{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    background-color: cornflowerblue;
+    text-decoration: line-through;
+}
+h1{
+    
+    background-color: darksalmon;
+    font-size: larger;
+    text-decoration: dotted;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+div{
+    border: 2px solid yellowgreen;
+    border-width: 200px;
+    width: auto;
+    display: inline;
+    display: inline-flex;
+    display: inline-block;
+}
