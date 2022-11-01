@@ -28,4 +28,5 @@ div{
     display: inline;
     display: inline-flex;
     display: inline-block;
+    border-radius: 10px;
 }

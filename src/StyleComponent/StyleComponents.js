@@ -24,6 +24,7 @@ const StyleComponents = () => {
         border-width: 20px;
         padding:15px;
         width: 200px;
+        border-radius: 10px;
         
         display: inline-block;
    
