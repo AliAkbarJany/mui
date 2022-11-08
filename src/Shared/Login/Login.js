@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Loading/Loading';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
@@ -14,6 +15,8 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [token] = useToken(guser || user)
+
     // Require Auth....
 
     const navigate = useNavigate()
@@ -22,6 +25,10 @@ const Login = () => {
 
     if (guser || user) {
         console.log(guser || user)
+        // navigate(from, { replace: true });
+    }
+
+    if (token) {
         navigate(from, { replace: true });
     }
 

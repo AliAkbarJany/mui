@@ -43,6 +43,7 @@ const CheckoutForm = ({ product }) => {
         if (card == null) {
             return;
         }
+        
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,

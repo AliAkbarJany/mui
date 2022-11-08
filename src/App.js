@@ -14,6 +14,12 @@ import AllUsers from './Dashboard/AllUsers';
 import Payment from './Dashboard/Payment';
 import StyleComponents from './StyleComponent/StyleComponents';
 
+// Toastify...
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+import RequireAdmin from './Shared/RequireAdmin';
+
 function App() {
   return (
     <div className="App">
@@ -34,11 +40,20 @@ function App() {
           </RequireAuth>
         }>
           <Route index element={<MyProfile></MyProfile>}></Route>
-          <Route path='allUsers' element={<AllUsers></AllUsers>}></Route>
+          
+          <Route path='allUsers' element={
+            <RequireAdmin>
+              <AllUsers></AllUsers>
+            </RequireAdmin>
+          }></Route>
+
           {/* <Route path='payment' element={<Payment></Payment>}></Route> */}
           <Route path='payment/:paymentId' element={<Payment></Payment>}></Route>
         </Route>
       </Routes>
+
+      <ToastContainer />
+
     </div>
   );
 }

@@ -26,7 +26,9 @@ const Registration = () => {
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     // Custom Hook (useToken)....
-    const [Token]=useToken(guser || user)
+    const [token] = useToken(guser || user)
+
+
 
 
 
@@ -73,18 +75,22 @@ const Registration = () => {
         await updateProfile({ displayName: name });
         alert('Updated profile');
         console.log('Update done')
-        navigate('/home')
+        // navigate('/home')
 
         console.log('Material UI Inputs', inputs)
-        
+
     }
 
     const navigate = useNavigate()
-    
 
-    if (guser || user) {
-        console.log(guser || user)
-        navigate('/images')
+
+    // if (guser || user) {
+    //     console.log(guser || user)
+    //     navigate('/images')
+    // }
+
+    if (token) {
+        navigate('/styleComponents')
     }
 
     if (loading || gloading) {
@@ -92,7 +98,7 @@ const Registration = () => {
     }
     let errorMessage;
     if (error || gerror || updateError) {
-        console.log('error message',error || gerror || updateError)
+        console.log('error message', error || gerror || updateError)
         errorMessage = <p className='text-red-500'>Error: {error?.message || gerror?.message || updateError?.message}</p>;
     }
 
@@ -102,14 +108,7 @@ const Registration = () => {
             <div class="card lg:card-side bg-base-100 shadow-xl ">
                 <div class="card-body items-center text-center">
                     <h2 class="card-title ">Registration</h2>
-                    {/* <Box
-                        component="form"
-                        sx={{
-                            '& > :not(style)': { m: 1, width: '25ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    > */}
+                   
                     <form className='mt-4' onSubmit={handleRegistration}>
                         <div class="form-control w-full max-w-xs">
                             <TextField name="name" type="text" value={inputs.name}
@@ -168,38 +167,7 @@ const Registration = () => {
                     {/* password rule (1) */}
 
 
-                    {/* </Box> */}
-
-
-                    {/* <form className='mt-4' onSubmit={handleRegistration}>
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Name</span>
-                            </label>
-                            <input type="text" placeholder="Name" name="name" class="input input-bordered input-warning w-full max-w-xs " required />
-                            <label class="label">
-                                <span class="label-text">Email</span>
-                            </label>
-                            <input type="email" placeholder="Enter Your Email" name="email" class="input input-bordered input-warning w-full max-w-xs " required />
-                            <label class="label">
-                                <span class="label-text">Password</span>
-                            </label>
-                            <input name="password" type="password" placeholder="Password" class="input input-bordered input-warning w-full max-w-xs " />
-                        </div>
-
-                        {errorMessage}
-
-                        <div class="card-actions justify-center">
-                            <button type='submit' class="btn btn-accent" >Registration</button>
-                        </div>
-                    </form>
-
-                    <p>Have an Account <Link to='/login' className='text-primary'>Please Login</Link> </p>
-
-                    <div class="divider">OR</div>
-
-                    <button onClick={() => signInWithGoogle()} class="btn btn-accent sm:btn-sm md:btn-md lg:btn-lg">Google Registration</button> */}
-
+                    
                 </div>
             </div>
         </div>
