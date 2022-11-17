@@ -11,6 +11,9 @@ const Home = () => {
             <h2 className='text-3xl'>Welcome to Home Page</h2>
             <AllProducts></AllProducts>
             {/* <QRcode></QRcode> */}
+
+            <div class="divider">OR</div>
+            
             <div className='grid justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-5'>
                 <CreateQRcode></CreateQRcode>
                 <ReadQRcode></ReadQRcode>

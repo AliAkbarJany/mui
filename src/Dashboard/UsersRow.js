@@ -79,6 +79,7 @@ const UsersRow = ({ user, index, refetch }) => {
                 })
         }
     }
+    
     return (
         <tr class='hover'>
             <th>{index + 1}</th>

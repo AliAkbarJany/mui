@@ -9,6 +9,7 @@ import Login from './Shared/Login/Login';
 import Registration from './Shared/Registration/Registration';
 import Dashboard from './Dashboard/Dashboard';
 import RequireAuth from './Shared/RequireAuth';
+import RequireAdmin from './Shared/RequireAdmin';
 import MyProfile from './Dashboard/MyProfile';
 import AllUsers from './Dashboard/AllUsers';
 import Payment from './Dashboard/Payment';
@@ -18,7 +19,7 @@ import StyleComponents from './StyleComponent/StyleComponents';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
-import RequireAdmin from './Shared/RequireAdmin';
+
 
 function App() {
   return (
