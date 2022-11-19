@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import Cart from '../Cart/Cart';
 import SingleProduct from '../SingleProduct/SingleProduct';
+
+import AddToDb from '../Utilities/AddToDb';
+
+
 
 const AllProducts = () => {
     const [allProducts, setAllproducts] = useState([])
-    
+
     useEffect(() => {
         fetch('http://localhost:5000/products')
             .then(res => res.json())
@@ -11,13 +16,19 @@ const AllProducts = () => {
     }, [])
 
     // Cart..................
-    const [cart,setCart]=useState([])
+    const [cart, setCart] = useState([])
 
-    const handleAddToCart=(singlePro)=>{
+    const handleAddToCart = (singlePro) => {
         console.log(singlePro)
-        const newCart=[...cart,singlePro]
+        const newCart = [...cart, singlePro]
         setCart(newCart)
+        AddToDb(singlePro._id)
     }
+
+    
+
+
+
     return (
         <div className='mt-5  justify-items-center grid  sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2'>
             {/* <h2>All Products Page:{allProducts.length}</h2> */}
@@ -28,8 +39,8 @@ const AllProducts = () => {
                             key={singlePro._id}
                             singlePro={singlePro}
                             handleAddToCart={handleAddToCart}
-                            
-                            >
+
+                        >
 
                         </SingleProduct>)
                 }
@@ -38,9 +49,8 @@ const AllProducts = () => {
             <div style={{ "backgroundColor": "#F6DAAE" }}>
                 <div class="card w-96  ">
                     <div class="card-body items-center text-center">
-                        <h2 class="card-title">Order summary!</h2>
-                        <p>Selected Items: {cart.length}</p>
 
+                        <Cart cart={cart}></Cart>
                     </div>
                 </div>
             </div>

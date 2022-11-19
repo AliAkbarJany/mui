@@ -1,8 +1,11 @@
 import { signOut } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+
+import { TfiShoppingCartFull } from "react-icons/tfi";
+import SingleProduct from '../../Products/SingleProduct/SingleProduct';
 
 const Navbar = () => {
     const [user] = useAuthState(auth);
@@ -10,6 +13,17 @@ const Navbar = () => {
     const logout = () => {
         signOut(auth);
     };
+
+    // const [singlePro,setSinglePro]=useState({})
+
+    // Cart..................
+    const [cart, setCart] = useState([])
+
+    const handleAddToCart = (singlePro) => {
+        console.log(singlePro)
+        const newCart = [...cart, singlePro]
+        setCart(newCart)
+    }
     const menuItems = <>
         <li> <Link to='/home'>HOME</Link> </li>
 
@@ -21,12 +35,28 @@ const Navbar = () => {
 
         <li>
             {user ?
-            <button onClick={logout} className='btn btn-warning'>SignOut</button> :
-            <Link to='/login'>LOGIN</Link>}
+                <button onClick={logout} className='btn btn-warning'>SignOut</button> :
+                <Link to='/login'>LOGIN</Link>}
         </li>
 
-        
+        <div className=''>
+            <div >
+                <TfiShoppingCartFull>{cart.length}</TfiShoppingCartFull>
+            </div>
+        </div>
+        <div style={{ "backgroundColor": "#F6DAAE" }}>
+            <div class="card w-96  ">
+                <div class="card-body items-center text-center">
+                    <h2 class="card-title">Order summary!</h2>
+                    <p>Selected Items: {cart.length}</p>
+
+                </div>
+            </div>
+        </div>
+
     </>
+
+
     return (
         <div>
             <div style={{ "backgroundColor": "#2A8C82" }} class="navbar justify-around font-bold">
@@ -37,6 +67,7 @@ const Navbar = () => {
                         </label>
                         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                             {menuItems}
+
 
                         </ul>
                     </div>
@@ -53,7 +84,14 @@ const Navbar = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                 </div>
+
             </div>
+            {/* <div>
+
+                <SingleProduct  handleAddToCart={handleAddToCart}></SingleProduct>
+
+            </div> */}
+
         </div>
     );
 };
