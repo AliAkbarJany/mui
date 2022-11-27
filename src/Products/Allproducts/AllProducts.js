@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Cart from '../Cart/Cart';
 import SingleProduct from '../SingleProduct/SingleProduct';
 
-import AddToDb from '../Utilities/AddToDb';
+import { AddToDb, getStoredCart } from '../Utilities/AddToDb';
 
 
 
@@ -10,10 +10,49 @@ const AllProducts = () => {
     const [allProducts, setAllproducts] = useState([])
 
     useEffect(() => {
+
+        console.log('all products load before fatch')
+
         fetch('http://localhost:5000/products')
             .then(res => res.json())
-            .then(data => setAllproducts(data))
+            .then(data => {
+                setAllproducts(data)
+                // console.log('all products load FINISH')
+            })
     }, [])
+
+
+    // loacal storage thake (cart get) kora......
+    useEffect(() => {
+
+        console.log('loacal storage first line', allProducts)
+        const cartStored = getStoredCart()
+        console.log('cartStored', cartStored)  
+        /*.
+        635650ab8f76f6d4bb02d6f9:1
+        635650ab8f76f6d4bb02d6fa:2
+        635650ab8f76f6d4bb02d6fc:1
+        */
+        for (const id in cartStored) {
+            console.log(id)  /* 635650ab8f76f6d4bb02d6fa */
+            const addedProduct = allProducts.find(product => product._id === id)
+            console.log(addedProduct)
+            /*
+                description:""
+                price:5000
+                productName:"table"
+                quantity:17
+                _id:"635650ab8f76f6d4bb02d6fc"
+
+            */
+            if (addedProduct) {
+                const quantity = cartStored[id]
+                addedProduct.quantity=quantity
+            }
+
+        }
+        // console.log('loacal storage FINISH')
+    }, [allProducts])
 
     // Cart..................
     const [cart, setCart] = useState([])
@@ -25,7 +64,7 @@ const AllProducts = () => {
         AddToDb(singlePro._id)
     }
 
-    
+
 
 
 

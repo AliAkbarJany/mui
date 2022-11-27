@@ -6,12 +6,14 @@ import auth from '../../firebase.init';
 
 import { TfiShoppingCartFull } from "react-icons/tfi";
 import SingleProduct from '../../Products/SingleProduct/SingleProduct';
+import { AddToDb, getStoredCart } from '../../Products/Utilities/AddToDb';
 
 const Navbar = () => {
     const [user] = useAuthState(auth);
     console.log(user)
     const logout = () => {
         signOut(auth);
+        
     };
 
     // const [singlePro,setSinglePro]=useState({})
@@ -23,7 +25,24 @@ const Navbar = () => {
         console.log(singlePro)
         const newCart = [...cart, singlePro]
         setCart(newCart)
+        AddToDb(singlePro._id)
     }
+
+    // total cart..........
+    const cartResult = getStoredCart()
+    console.log(cartResult)
+
+    const values = Object.values(cartResult);
+
+    const sum = values.reduce((accumulator, value) => {
+        return accumulator + value;
+    }, 0);
+
+    console.log('sum of cart', sum)
+
+    // .............................
+
+
     const menuItems = <>
         <li> <Link to='/home'>HOME</Link> </li>
 
@@ -41,18 +60,13 @@ const Navbar = () => {
 
         <div className=''>
             <div >
-                <TfiShoppingCartFull>{cart.length}</TfiShoppingCartFull>
+                <li>
+                    {sum}
+                </li>
+                <TfiShoppingCartFull></TfiShoppingCartFull>
             </div>
         </div>
-        <div style={{ "backgroundColor": "#F6DAAE" }}>
-            <div class="card w-96  ">
-                <div class="card-body items-center text-center">
-                    <h2 class="card-title">Order summary!</h2>
-                    <p>Selected Items: {cart.length}</p>
 
-                </div>
-            </div>
-        </div>
 
     </>
 
@@ -71,7 +85,7 @@ const Navbar = () => {
 
                         </ul>
                     </div>
-                    <a class="btn btn-ghost normal-case text-2xl font-bold">STORE MANAGEMENT</a>
+                    <a class="btn btn-ghost normal-case text-2xl font-bold">Material UI</a>
                 </div>
                 <div class="navbar-center hidden lg:flex">
                     <ul class="menu menu-horizontal p-0">

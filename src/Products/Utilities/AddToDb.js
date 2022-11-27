@@ -42,11 +42,10 @@ const removeFromDb = id =>{
             localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
         }
     }
-    return (
-        <div>
-            
-        </div>
-    );
 };
 
-export default AddToDb;
+export  {
+    AddToDb,
+    getStoredCart,
+    removeFromDb
+};
